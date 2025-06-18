@@ -34,15 +34,19 @@ public class MainCalculator {
             case 1:
                 resultCalculation = operations.Addition(number1, number2);
                 System.out.println("The result of the cont " + number1+ " + "+number2+" is "+ resultCalculation);
+                break;
             case 2:
                 resultCalculation = operations.Subtraction(number1, number2);
                 System.out.println("The result of the cont " + number1+ " - "+number2+" is "+ resultCalculation);
+                break;
             case 3:
                 resultCalculation = operations.Multiplication(number1, number2);
                 System.out.println("The result of the cont " + number1+ " * "+number2+" is "+ resultCalculation);
+                break;
             case 4:
                 resultCalculation = operations.Division(number1, number2);
                 System.out.println("The result of the cont " + number1+ " / "+number2+" is "+ resultCalculation);
+                break;
             default:
 
         }
