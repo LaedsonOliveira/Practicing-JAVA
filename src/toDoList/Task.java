@@ -5,11 +5,11 @@ public class Task {
     private String title;
     private String description;
     private String deliveryDate;
-    private int importance;
+    private boolean importance;
     private boolean active;
 
 
-    public Task(String title, String description, String deliveryDate, int importance) {
+    public Task(String title, String description, String deliveryDate, boolean importance) {
         this.title = title;
         this.description = description;
         this.deliveryDate = deliveryDate;
@@ -34,7 +34,7 @@ public class Task {
         return deliveryDate;
     }
 
-    public int getImportance() {
+    public boolean getImportance() {
         return importance;
     }
 
