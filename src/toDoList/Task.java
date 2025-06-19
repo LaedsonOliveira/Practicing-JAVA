@@ -1,15 +1,18 @@
 package toDoList;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Task {
     private int id;
     private String title;
     private String description;
-    private String deliveryDate;
+    private LocalDate deliveryDate;
     private boolean importance;
     private boolean active;
 
 
-    public Task(String title, String description, String deliveryDate, boolean importance) {
+    public Task(String title, String description, LocalDate deliveryDate, boolean importance) {
         this.title = title;
         this.description = description;
         this.deliveryDate = deliveryDate;

@@ -1,7 +1,9 @@
 package toDoList;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class TaskList {
@@ -13,16 +15,23 @@ public class TaskList {
     private List<Task> listTasks = new ArrayList<>();
     private List<Task> listCompletTask = new ArrayList<>();
 
-    public void GetAllTask(){
+    public void getAllTask(){
         System.out.println("          ALL TASKS");
-        for (Task task: listTasks){
+        if (listTasks != null) {
+            for (Task task : listTasks) {
+                System.out.println("+----------------------------------------------");
+                System.out.println("| id: " + task.getId() + " Title: " + task.getTitle());
+                System.out.println("+-----------------------------------------------");
+            }
+        }
+        else{
             System.out.println("+----------------------------------------------");
-            System.out.println("| id: "+task.getId()+" Title: "+task.getTitle());
+            System.out.println("|  List empty");
             System.out.println("+-----------------------------------------------");
         }
     }
 
-    public void GetTask(int id){
+    public void getTask(int id){
         Task getTask = null;
         for (Task task : listTasks){
             if( task.getId() == id){
@@ -34,7 +43,7 @@ public class TaskList {
         }
     }
 
-    public String CreateTask(String title, String description, String deliveryDate, boolean importance){
+    public String createTask(String title, String description, LocalDate deliveryDate, boolean importance){
         try{
             Task task = new Task(title, description, deliveryDate,importance);
             listTasks = Collections.singletonList(task);
@@ -46,7 +55,7 @@ public class TaskList {
 
     }
 
-    public String CompleteTask(int id){
+    public String completeTask(int id){
         Task taskRemoved = null;
         try{
             for (Task task: listTasks){
@@ -67,7 +76,7 @@ public class TaskList {
         return "";
     }
 
-    public String DeleteTask(int id){
+    public String deleteTask(int id){
         Task taskRemoved = null;
         try{
             for (Task task: listTasks){
