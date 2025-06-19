@@ -11,15 +11,16 @@ public class TaskList {
     private int numberTasks;
     private int numberOkTasks;
     private int numberNotTasks;
+    private int contadorId;
 
     private List<Task> listTasks = new ArrayList<>();
     private List<Task> listCompletTask = new ArrayList<>();
 
     public void getAllTask(){
-        System.out.println("          ALL TASKS");
+        System.out.println("         TASKS");
+        System.out.println("+----------------------------------------------");
         if (listTasks != null) {
             for (Task task : listTasks) {
-                System.out.println("+----------------------------------------------");
                 System.out.println("| id: " + task.getId() + " Title: " + task.getTitle());
                 System.out.println("+-----------------------------------------------");
             }
@@ -31,22 +32,24 @@ public class TaskList {
         }
     }
 
-    public void getTask(int id){
+    public String getTask(int id){
         Task getTask = null;
         for (Task task : listTasks){
             if( task.getId() == id){
                 getTask = task;
             }
             if (getTask != null){
-                System.out.println("ID: "+ getTask.getId()+ " Title: "+ getTask.getTitle());
+                return ("ID: "+ getTask.getId()+ " Title: "+ getTask.getTitle());
             }
         }
+        return "";
     }
 
     public String createTask(String title, String description, LocalDate deliveryDate, boolean importance){
         try{
-            Task task = new Task(title, description, deliveryDate,importance);
-            listTasks = Collections.singletonList(task);
+            contadorId++;
+            Task task = new Task(title, description, deliveryDate,importance, contadorId);
+            listTasks.add(task);
         }catch (Exception e){
             return "Invalid information";
         }
@@ -82,7 +85,6 @@ public class TaskList {
             for (Task task: listTasks){
                 if(task.getId() == id){
                     taskRemoved = task;
-                    break;
                 }
                 if (taskRemoved != null){
                     listTasks.remove(taskRemoved);

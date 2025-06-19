@@ -12,13 +12,13 @@ public class Task {
     private boolean active;
 
 
-    public Task(String title, String description, LocalDate deliveryDate, boolean importance) {
+    public Task(String title, String description, LocalDate deliveryDate, boolean importance, int id) {
         this.title = title;
         this.description = description;
         this.deliveryDate = deliveryDate;
         this.importance = importance;
+        this.id = id;
         active = true;
-        id++;
     }
 
     public int getId() {
@@ -33,7 +33,7 @@ public class Task {
         return description;
     }
 
-    public String getDeliveryDate() {
+    public LocalDate getDeliveryDate() {
         return deliveryDate;
     }
 
