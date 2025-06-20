@@ -33,6 +33,8 @@ public class Task {
         return description;
     }
 
+
+
     public LocalDate getDeliveryDate() {
         return deliveryDate;
     }
@@ -41,7 +43,7 @@ public class Task {
         return importance;
     }
 
-    public boolean isActive() {
+    public boolean getActive() {
         return active;
     }
 

@@ -1,6 +1,7 @@
 package toDoList;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -15,20 +16,16 @@ public class TaskList {
 
     private List<Task> listTasks = new ArrayList<>();
     private List<Task> listCompletTask = new ArrayList<>();
+    LocalDate dateNow = LocalDate.now();
 
     public void getAllTask(){
         System.out.println("         TASKS");
-        System.out.println("+----------------------------------------------");
+        System.out.println("+-----------------------------------------------");
         if (listTasks != null) {
             for (Task task : listTasks) {
-                System.out.println("| id: " + task.getId() + " Title: " + task.getTitle() + " Delivery: " + task.getDeliveryDate());
+                System.out.println("| id: " + task.getId() + " Title: " + task.getTitle() + " Delivery: " + task.getDeliveryDate() + " Finish: "+ ((task.getActive() == false)? "yes": "no"));
                 System.out.println("+-----------------------------------------------");
             }
-        }
-        else{
-            System.out.println("+----------------------------------------------");
-            System.out.println("|  List empty");
-            System.out.println("+-----------------------------------------------");
         }
     }
 
@@ -39,7 +36,18 @@ public class TaskList {
                 getTask = task;
             }
             if (getTask != null){
-                return ("ID: "+ getTask.getId()+ " Title: "+ getTask.getTitle() + " Delivery: " + task.getDeliveryDate());
+                Period diference = Period.between( dateNow , getTask.getDeliveryDate());
+                String response = (getTask.getActive() != true)? "Task Conclued": "Time: " + diference.getDays() + " days";
+
+                return ("\n+-------------------------------------------------" +
+                        "\n| Title: "+ getTask.getTitle() +
+                        "\n| " + response +
+                        "\n| ID: "+ getTask.getId()+
+                        "\n+-------------------------------------------------" +
+                        "\n| Description: " + getTask.getDescription()+
+                        "\n+-------------------------------------------------");
+            } else{
+                return "Invalid ID, try again";
             }
         }
         return "";
@@ -60,16 +68,17 @@ public class TaskList {
     }
 
     public String completeTask(int id){
-        Task taskRemoved = null;
+        Task taskCompleted = null;
         try{
             for (Task task: listTasks){
                 if(task.getId() == id){
-                    taskRemoved = task;
+                    taskCompleted = task;
                 }
-                if (taskRemoved != null){
-                    listTasks.remove(taskRemoved);
-                    listCompletTask.add(taskRemoved);
-                    return "Task "+ taskRemoved.getTitle()+" completed successfully";
+                if (taskCompleted != null){
+                    task.setActive(false);
+                    return "Task "+ taskCompleted.getTitle()+" completed successfully";
+                } else{
+                    return "Invalid ID, try again";
                 }
             }
         }catch (Exception e){

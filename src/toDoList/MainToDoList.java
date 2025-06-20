@@ -11,12 +11,12 @@ public class MainToDoList {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\n \n \nToDoList, " + dateNow);
-        System.out.println("Your task list is currently empty! \n \nAdd news task! \n");
+        System.out.println("Your task list is currently empty! \n \nAdd news task!");
 
         boolean program = true;
         while (program){
-            try{
-                System.out.println("Choose the option: \n 1 - Create Task \n 2 - Get Task List \n 3 - Search Task \n 4 - Delete Task");
+
+                System.out.println("\n\n\nChoose the option: \n 1 - Create Task \n 2 - Get Task List \n 3 - Search Task \n 4 - Complete Task \n 5 - Delete Task \n 6 - Out");
                 char act = scanner.nextLine().charAt(0);
 
                 switch (act){
@@ -52,6 +52,23 @@ public class MainToDoList {
 
                     case '4':
                         try{
+                            System.out.println("Write id of Task that you will Complete:");
+                            int idSearch = Integer.parseInt((scanner.nextLine()));
+                            String valueTask = (taskList.getTask(idSearch) != null) ? taskList.getTask(idSearch) : "Task don't find";
+                            System.out.println("Confirm that is this Task: \n "+  valueTask +"\n (y) - yes (n) - no");
+                            if(scanner.nextLine().charAt(0) == 'y')
+                                System.out.println(taskList.completeTask(idSearch));
+                            else
+                                System.out.println(("Not Completed"));
+
+                            break;
+                        } catch (Exception e){
+                            System.out.println("Value error!");
+                        }
+
+
+                    case '5':
+                        try{
                             System.out.println("Write id of Task that you will delete:");
                             int idSearch = Integer.parseInt((scanner.nextLine()));
                             System.out.println("Confirm that is this Task: "+ taskList.getTask(idSearch) +" (y) - yes (n) - no");
@@ -65,26 +82,17 @@ public class MainToDoList {
                             System.out.println("Value error!");
                         }
 
+                    case '6':
+                        System.out.println("Program closed!");
+                        program = false;
+
                     default:
                         System.out.println("Invalid Value, try again!");
                         break;
                 }
-            } catch (Exception e){
-                System.out.println("Value error!");
-            }
-
-            try {
-                System.out.println("\n\n\nWant to continue? (y) - yes (n) - no");
-                program = (scanner.nextLine().charAt(0) == 'y') ? true : false;
-                System.out.println("\n\n\n");
-            } catch (Exception e){
-                System.out.println("Value error!");
-
-            }
-
 
         }
 
-
     }
+
 }
