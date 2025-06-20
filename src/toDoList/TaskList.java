@@ -21,7 +21,7 @@ public class TaskList {
         System.out.println("+----------------------------------------------");
         if (listTasks != null) {
             for (Task task : listTasks) {
-                System.out.println("| id: " + task.getId() + " Title: " + task.getTitle());
+                System.out.println("| id: " + task.getId() + " Title: " + task.getTitle() + " Delivery: " + task.getDeliveryDate());
                 System.out.println("+-----------------------------------------------");
             }
         }
@@ -39,16 +39,17 @@ public class TaskList {
                 getTask = task;
             }
             if (getTask != null){
-                return ("ID: "+ getTask.getId()+ " Title: "+ getTask.getTitle());
+                return ("ID: "+ getTask.getId()+ " Title: "+ getTask.getTitle() + " Delivery: " + task.getDeliveryDate());
             }
         }
         return "";
     }
 
-    public String createTask(String title, String description, LocalDate deliveryDate, boolean importance){
+    public String createTask(String title, String description, LocalDate deliveryDate, int term){
         try{
             contadorId++;
-            Task task = new Task(title, description, deliveryDate,importance, contadorId);
+            LocalDate dateDeliveryTask = deliveryDate.plusDays(term);
+            Task task = new Task(title, description, dateDeliveryTask, contadorId);
             listTasks.add(task);
         }catch (Exception e){
             return "Invalid information";
@@ -64,7 +65,6 @@ public class TaskList {
             for (Task task: listTasks){
                 if(task.getId() == id){
                     taskRemoved = task;
-                    break;
                 }
                 if (taskRemoved != null){
                     listTasks.remove(taskRemoved);
@@ -89,6 +89,8 @@ public class TaskList {
                 if (taskRemoved != null){
                     listTasks.remove(taskRemoved);
                     return "Task "+ taskRemoved.getTitle()+" removed successfully";
+                } else{
+                    return "Invalid ID, try again";
                 }
             }
         }catch (Exception e){

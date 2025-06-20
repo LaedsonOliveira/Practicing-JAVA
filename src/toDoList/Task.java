@@ -12,7 +12,7 @@ public class Task {
     private boolean active;
 
 
-    public Task(String title, String description, LocalDate deliveryDate, boolean importance, int id) {
+    public Task(String title, String description, LocalDate deliveryDate, int id) {
         this.title = title;
         this.description = description;
         this.deliveryDate = deliveryDate;
